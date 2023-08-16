@@ -63,6 +63,22 @@ inline void Deallocate(char* p, MemoryAllocator* allocator) {
   }
 }
 
+struct CustomDeleter {
+  CustomDeleter(MemoryAllocator* a = nullptr) : allocator(a) {}
+
+  void operator()(char* ptr) const {
+    if (allocator) {
+      allocator->Deallocate(reinterpret_cast<void*>(ptr));
+    } else {
+      delete[] ptr;
+    }
+  }
+
+  MemoryAllocator* allocator;
+};
+
+using CacheAllocationPtr = std::unique_ptr<char[], CustomDeleter>;
+
 struct JemallocAllocatorOptions {
   static const char* kName() { return "JemallocAllocatorOptions"; }
   // Jemalloc tcache cache allocations by size class. For each size class,
@@ -101,5 +117,6 @@ struct JemallocAllocatorOptions {
 extern Status NewJemallocNodumpAllocator(
     JemallocAllocatorOptions& options,
     std::shared_ptr<MemoryAllocator>* memory_allocator);
+
 
 }  // namespace ROCKSDB_NAMESPACE

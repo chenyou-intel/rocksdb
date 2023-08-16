@@ -16,6 +16,7 @@ namespace ROCKSDB_NAMESPACE {
 // for details.
 // For code sanity, BlockType should imply a specific TBlocklike for
 // BlocklikeTraits.
+/*
 enum class BlockType : uint8_t {
   kData,
   kFilter,  // for second level partitioned filters and full filters
@@ -30,5 +31,5 @@ enum class BlockType : uint8_t {
   // Note: keep kInvalid the last value when adding new enum values.
   kInvalid
 };
-
+*/
 }  // namespace ROCKSDB_NAMESPACE

@@ -12,12 +12,12 @@
 #include <functional>
 #include <mutex>
 
-#include "memory/memory_allocator.h"
+//#include "memory/memory_allocator.h"
 #include "rocksdb/advanced_options.h"
 #include "rocksdb/customizable.h"
+#include "rocksdb/rocksdb_namespace.h"
 #include "rocksdb/utilities/object_registry.h"
-#include "table/block_based/block_type.h"
-#include "test_util/sync_point.h"
+//#include "test_util/sync_point.h"
 
 namespace ROCKSDB_NAMESPACE {
 class CompressionInfo;
@@ -445,8 +445,8 @@ class CompressionInfo {
       ret = s.ok();
     }
 
-    TEST_SYNC_POINT_CALLBACK("CompressData:TamperWithReturnValue",
-                             static_cast<void*>(&ret));
+    //TEST_SYNC_POINT_CALLBACK("CompressData:TamperWithReturnValue",
+    //                         static_cast<void*>(&ret));
 
     return ret;
   }
